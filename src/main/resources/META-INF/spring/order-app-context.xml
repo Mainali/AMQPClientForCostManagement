@@ -10,21 +10,12 @@
     <rabbit:connection-factory id="connectionFactory" host="localhost" username="pukar" password="puk123"/>
 
 
+<!--  ****************  Product CONSUMER ************************* -->
  <rabbit:listener-container connection-factory="connectionFactory">
- <!-- Get ALL Online purchases OR just "Classic" ones -->
-<!-- 	<rabbit:listener ref="orderListener" method="listen" queue-names="purchasesOnlineClassic" /> -->
-	<rabbit:listener ref="orderListener" method="listen" queue-names="purchasesOnline" />
+	<rabbit:listener ref="queueListener" method="listen" queue-names="PQueue" />
 </rabbit:listener-container>
 
-<bean id="orderListener" class="edu.mum.amqp.OrderListener" />
-
-
-<!--  ****************  ANSWER CONSUMER ************************* -->
- <rabbit:listener-container connection-factory="connectionFactory">
-	<rabbit:listener ref="queueListener" method="listen" queue-names="answerQueue" />
-</rabbit:listener-container>
-
-<bean id="queueListener" class="edu.mum.amqp.AnswerListener" />
+<bean id="queueListener" class="edu.mum.amqp.ProductListener" />
 
 
 </beans>
